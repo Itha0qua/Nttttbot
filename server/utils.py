@@ -8,15 +8,15 @@ import setu
 import jiki
 import socket  
 import time
-import random
-from random import choice
-
+from qa import *
 
 class BOT:
-    def __init__(self,bot_qq):
-        self.CQ_at = '[CQ:at,qq='+bot_qq+']'
-        self.answer = ['爷吐了','nmsl','就这？','我服了','nmd,wsm','?','smjb']
-        self.tar_url = "http://0.0.0.0:5700"
+    def __init__(self , data):
+        self.bot_qq = data['bot_qq']
+
+        self.CQ_at = '[CQ:at,qq='+str(self.bot_qq)+']'
+        self.answer = QA(data['answer'])
+        self.tar_url = data['tar_url']
 
     def process(self , jresp):
         if  '图来' in jresp['message']:
@@ -60,10 +60,10 @@ class BOT:
             #print(restart)
 
         elif self.CQ_at in jresp['message']:
-            stri = jresp['message'].replace(self.CQ_at,'')
+            stri = jresp['message'].replace(self.CQ_at,'').replace(' ','')
             #response=chatbot.get_response(stri)
             #response='?'
-            response = choice(self.answer)
+            response = self.answer.qna(stri)
             print(response)
             self.send_group_msg('[CQ:reply,id='+str(jresp['message_id'])+']'+str(response),jresp['group_id'])
 

@@ -1,7 +1,5 @@
 import socket  
 import time
-import random
-from random import choice
 from utils import *
 #from chatterbot import ChatBot
 #from chatterbot.trainers import ChatterBotCorpusTrainer
@@ -19,15 +17,13 @@ from utils import *
 
 if __name__ == '__main__':
 
-    s = socket.socket()         
-    host = "0.0.0.0" # ·Ö,0;:
-
-    Manager_id = [1812754005 , 752865034]
-    b = BOT('2361844282')  
-    port = 7469
+    s = socket.socket()   
+    with open('config.json','r') as f:
+        jdata = json.load(f)      
+    host = jdata['host'] 
+    b = BOT(jdata)  
+    port = jdata['my_port']
     s.bind((host, port))        
-    #data={'user_id':752765034,'message':'test'}
-    #postdata=urllib.parse.urlencode(data).encode('utf8') 
     s.listen(5)     
     print("start successfully")        
     

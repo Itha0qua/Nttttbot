@@ -1,4 +1,8 @@
 from math import *
+from random import *
+from scipy import *
+from scipy import integrate
+from numpy import *
 import signal
 
 def signal_handler(signum , frame):
@@ -16,3 +20,8 @@ def eval_com(stri):
         signal.alarm(0)
         return '太烧脑了'
     return result
+
+if __name__ == '__main__':
+    while(True):
+        a = input()
+        print(eval_com(a))
