@@ -5,9 +5,6 @@ from random import choice
 from utils import *
 #from chatterbot import ChatBot
 #from chatterbot.trainers import ChatterBotCorpusTrainer
-    
-
-
 
 #chatbot = ChatBot('Ron Obvious')
 # Create a new trainer for the chatbot
@@ -16,17 +13,16 @@ from utils import *
 # Train the chatbot based on the english corpus
 #trainer.train("chatterbot.corpus.chinese")
 
-meme = ['爷吐了','nmsl','就这？','我服了','nmd,wsm','?','smjb']
 
-s = socket.socket()         
-host = "0.0.0.0" # ·Ö,0;:
-
-Manager_id = [1812754005 , 752865034]
 
 
 
 if __name__ == '__main__':
 
+    s = socket.socket()         
+    host = "0.0.0.0" # ·Ö,0;:
+
+    Manager_id = [1812754005 , 752865034]
     b = BOT('2361844282')  
     port = 7469
     s.bind((host, port))        
@@ -43,7 +39,11 @@ if __name__ == '__main__':
             c.close()
             continue
         data_get = re.findall(r'{.+}',data_rec.decode('utf-8'))    
-        jresp = json.loads(data_get[0])
+        try:
+            jresp = json.loads(data_get[0])
+        except:
+            c.close()
+            continue
         #print(jresp)
         #c.send(postdata)
         print(jresp)
