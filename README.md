@@ -26,3 +26,6 @@
 
 ### 词语查询
 在[小鸡词典](https://jikipedia.com/)上进行词语查询，将查询结果作为字符串返回。
+
+### 德州扑克
+主要利用[deuces](https://github.com/worldveil/deuces)框架实现（适用于python3的库名是treys）
