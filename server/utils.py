@@ -9,17 +9,62 @@ import jiki
 import socket  
 import time
 from qa import *
+from poker import *
 
 class BOT:
     def __init__(self , data):
         self.bot_qq = data['bot_qq']
-
+        self.te = texas()
         self.CQ_at = '[CQ:at,qq='+str(self.bot_qq)+']'
         self.answer = QA(data['answer'])
         self.tar_url = data['tar_url']
+        self.texas_num = 0
 
     def process(self , jresp):
-        if  '图来' in jresp['message']:
+        if jresp['message'] == '开始德州':
+            result = self.te.new_game()
+            self.texas_num = 0
+            self.send_group_msg(result,jresp['group_id'])
+
+        elif jresp['message'] == '给我发牌':
+            #print(self.te.playerlist)
+            try:
+                result = self.te.add_player('[CQ:at,qq='+str(jresp['user_id'])+']')
+                self.send_private_msg(result,jresp['user_id'])
+                self.send_group_msg('发牌成功',jresp['group_id'])
+            except:
+                self.send_group_msg('发牌失败',jresp['group_id'])
+        
+        elif jresp['message'] == '弃牌':
+            #print(self.te.playerlist)
+            try:
+                result = self.te.remove_player('[CQ:at,qq='+str(jresp['user_id'])+']')
+                self.send_group_msg(result,jresp['group_id'])
+            except:
+                self.send_group_msg('弃牌失败',jresp['group_id'])
+
+        elif jresp['message'] == '翻牌':
+            #print(self.te.playerlist)
+            try:
+                if self.texas_num == 0:
+                    result = self.te.show_board(0,3)
+                    self.texas_num = 1
+                elif self.texas_num == 1:
+                    result = self.te.show_board(0,4)
+                    self.texas_num = 2
+                elif self.texas_num == 2:
+                    result = self.te.show_board(0,5)
+                    self.texas_num = 3
+                elif self.texas_num == 3:
+                    result = self.te.end()
+                    self.texas_num = 4
+                else:
+                    result = '已经结束了'
+                self.send_group_msg(result,jresp['group_id'])
+            except:
+                self.send_group_msg('出现意外,请重新开始',jresp['group_id'])
+
+        elif  '图来' in jresp['message']:
             search_str = jresp['message'].replace('图来','')
             se_u = setu.get_setu(False , search_str , 1, False)
             if se_u == []:
