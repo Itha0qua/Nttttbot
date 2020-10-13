@@ -1,7 +1,8 @@
 from treys import *
 evalu = Evaluator()
 class texas:
-    def init(self):
+    texas_num = 0
+    def __init__(self):
         self.deck = Deck()
         self.playerlist = {}
         self.board = []
