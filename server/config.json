@@ -3,5 +3,12 @@
     "host":"0.0.0.0",
     "my_port":7469,
     "tar_url":"http://0.0.0.0:5700",
-    "answer":["爷吐了","nmsl","就这？","我服了","nmd,wsm","?","smjb"]
+    "answer":["爷吐了","nmsl","就这？","我服了","nmd,wsm","?","smjb"],
+    "rss_list" : {
+        "知乎精选":"https://www.zhihu.com/rss",
+        "魔兽新闻":"https://www.wowhead.com/news/rss/all",
+        "游研社":"https://www.yystv.cn/rss/feed",
+        "v2ex":"https://www.v2ex.com/index.xml",
+        "linux中国":"https://linux.cn/rss.xml"
+    }
 }

@@ -10,6 +10,8 @@ import socket
 import time
 from qa import *
 from poker import *
+import feedparser
+
 
 class BOT:
     def __init__(self , data):
@@ -18,10 +20,23 @@ class BOT:
         self.CQ_at = '[CQ:at,qq='+str(self.bot_qq)+']'
         self.answer = QA(data['answer'])
         self.tar_url = data['tar_url']
+        self.rss_list = data['rss_list']
         #self.texas_num = 0
 
     def process(self , jresp):
-        if jresp['message'] == '开始德州':
+        if jresp['message'] in self.rss_list:
+            try:
+
+                rss = feedparser.parse(self.rss_list[jresp['message']])
+                result = ''
+                for i in range(0,5):
+                    result += rss.entries[i].title+'\n'+rss.entries[i].id+'\n'+rss.entries[i].published+'\n\n'
+                self.send_group_msg(result,jresp['group_id'])
+            except:
+                print('error')
+
+
+        elif jresp['message'] == '开始德州':
             try:
                 gid = str(jresp['group_id'])
                 if gid not in self.te:
