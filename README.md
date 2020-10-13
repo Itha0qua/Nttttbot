@@ -29,3 +29,6 @@
 
 ### 德州扑克
 主要利用[deuces](https://github.com/worldveil/deuces)框架实现（适用于python3的库名是treys）
+
+### RSS订阅
+利用[feedparser](https://github.com/kurtmckee/feedparser)框架实现。
