@@ -9,6 +9,7 @@
         "魔兽新闻":"https://www.wowhead.com/news/rss/all",
         "游研社":"https://www.yystv.cn/rss/feed",
         "v2ex":"https://www.v2ex.com/index.xml",
-        "linux中国":"https://linux.cn/rss.xml"
+        "linux中国":"https://linux.cn/rss.xml",
+        "acm":"https://cacm.acm.org/news.rss"
     }
 }
